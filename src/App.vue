@@ -1,0 +1,114 @@
+<template> 
+  <Spy-dialog :visible.sync='visible' width="54%"  :value="news">
+    {{a.b}}
+    {{a.age}}
+  <button @click="vue()">test</button>
+  <input v-model="news" />
+  </Spy-dialog>
+</template>
+
+<script>
+// import func from '../vue-temp/vue-editor-bridge';
+console.log(window.Vue);
+
+export default {
+  data(){
+    return{
+      firstVisible:true,
+      visible:true,
+      a:{
+        b:1
+      },
+      news:'2',
+      name:'1'
+    }
+  },
+  provide:{
+    new:function(){
+      console.log(this);
+      console.log(this.$data);
+      return this.$data
+    }
+  },
+  watch:{
+    name: [
+            'sayName1',
+            function(newVal, oldVal) {
+              console.log(newVal, oldVal);
+              
+                this.sayName2()
+            },
+
+            {
+                handler: 'sayName3',
+                immaediate: true
+            }
+        ]
+  },
+  created(){
+    this.a = Object.assign({}, this.a, {
+  age: 27,
+  favoriteColor: 'Vue Green'
+})
+      let that = this
+    this.$watch('a',(oldValue,newValue)=>{
+        console.log('触发watch',this,that.a);
+        console.log('触发watch1',oldValue,newValue);
+    })
+    
+  },
+  mounted(){
+    console.log(this.$template);
+    //call
+    Function.prototype.call_ = function (params) {
+      var args = [];
+      // 注意i从1开始
+      for (var i = 1, len = arguments.length; i < len; i++) {
+          args.push(arguments[i]);
+      }
+      console.log(params);
+      params.name = this
+      // params.name(arguments)
+      eval("params.name(" + args + ")")//eval方法执行字符串中的表达式
+      delete params.name
+    }
+    //apply
+    Function.prototype.apply_ = function (params){
+      params.name = this 
+      params.name(...Array.prototype.slice.call(arguments)[1])
+      delete params.name
+    }
+    // 调用call_
+    function name(params) {
+      console.log(this.b);
+      console.log('params',params);
+      console.log('arguments',arguments);
+    }
+    name.call_(this.a,'12')
+    // 调用 apply_
+    name.apply_(this.a,['12','1233213',7])
+  },
+  methods:{
+    vue(){
+
+      this.a.age =1
+      this.name = '2'
+      // Object.assign(this.$data, this.$options.data());
+      console.log(this.a);
+    },
+    sayName1() {
+        console.log('sayName1==>', this.name)
+    },
+    sayName2() {
+        console.log('sayName2==>', this.name)
+    },
+    sayName3() {
+        console.log('sayName3==>', this.name)
+    }
+  }
+}
+</script>
+
+<style lang='scss' scoped>
+
+</style>
