@@ -1,15 +1,17 @@
 <template> 
-  <Spy-dialog :visible.sync='visible' width="54%"  :value="news">
-    {{a.b}}
-    {{a.age}}
-  <button @click="vue()">test</button>
-  <input v-model="news" />
-  </Spy-dialog>
+  <div>
+    <Spy-input :placeholder='请输入' :type='text' :disabled = 'false' v-model="userName"></Spy-input>
+    <Spy-dialog :visible.sync='visible' width="54%"  :value="news">
+      {{a.b}}
+      {{a.age}}
+    <button @click="vue()">test</button>
+    <input v-model="news" />
+    </Spy-dialog>
+  </div>
 </template>
 
 <script>
 // import func from '../vue-temp/vue-editor-bridge';
-console.log(window.Vue);
 
 export default {
   data(){
@@ -20,7 +22,8 @@ export default {
         b:1
       },
       news:'2',
-      name:'1'
+      name:'1',
+      userName:''
     }
   },
   provide:{
