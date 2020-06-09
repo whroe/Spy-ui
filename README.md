@@ -1,5 +1,5 @@
 # new
-预览地址:https://test-12f2f4-1302342322.tcloudbaseapp.com/(腾讯云免费服务)
+预览地址:https://test-12f2f4-1302342322.tcloudbaseapp.com
 ## Project setup
 ```
 yarn install
