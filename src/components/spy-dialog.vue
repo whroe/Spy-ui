@@ -1,9 +1,10 @@
 <template>
   <div class="spy-dialog__wrapper" @click.self="handleClick" v-show="visible">
       <div class="spy-dialog" :style="{width}">
+
           <div class="spy-dialog__header">
               <span class="spy-dialog__title">{{title}}{{value}}</span>
-              <button type="button" class="spy-dialog__headerbtn"><i class="el-dialog__close el-icon el-icon-close"></i></button>
+              <button type="button" @click="visible = false" class="spy-dialog__headerbtn"><span>x</span></button>
           </div>
           <div class="spy-dialog__body">
               <slot>
@@ -47,7 +48,7 @@ export default {
         },
         visible:{
             type:Boolean,
-            default:false
+            default:true
         },
         width:{
           type:String,

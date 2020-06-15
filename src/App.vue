@@ -1,13 +1,31 @@
 <template> 
-  <div>
-    <Spy-input :placeholder='请输入' :type='text' :disabled = 'false' v-model="userName"></Spy-input>
-    <Spy-dialog :visible.sync='visible' width="54%"  :value="news">
-      {{a.b}}
-      {{a.age}}
-    <button @click="vue()">test</button>
-    <input v-model="news" />
-    </Spy-dialog>
-  </div>
+    <div class="header home">
+      <div class="topnav">
+        <router-link to='/'>首页</router-link>
+        <router-link to='/dialog'>dialog</router-link>
+      </div>
+
+      <div class="row">
+        <div class="column left">
+             <ul class="menu">
+               <li v-for="(item,i) in menuData" :key="i + 'r'" @click="routerJump(item.url)">{{item.name}}</li>
+             </ul>
+        </div>
+        
+        <div class="column right">
+              <!-- <Spy-input :placeholder='请输入' :type='text' :disabled = 'false' v-model="userName"></Spy-input>
+            <Spy-dialog :visible.sync='visible' width="54%"  :value="news">
+              {{a.b}}
+              {{a.age}}
+            <button @click="vue()">test</button>
+            <input v-model="news" />
+            </Spy-dialog> -->
+            <router-view></router-view>
+        </div>
+        
+
+      </div>
+    </div>
 </template>
 
 <script>
@@ -17,13 +35,21 @@ export default {
   data(){
     return{
       firstVisible:true,
-      visible:true,
+      visible:false,
       a:{
         b:1
       },
       news:'2',
       name:'1',
-      userName:''
+      userName:'',
+      menuData:[{
+        name:'首页',
+        url:'/'
+      },{
+        name:'dialog组件',
+        url:'/dialog'
+      }]
+      
     }
   },
   provide:{
@@ -107,6 +133,9 @@ export default {
     },
     sayName3() {
         console.log('sayName3==>', this.name)
+    },
+    routerJump(url){
+      this.$router.push(url)
     }
   }
 }
