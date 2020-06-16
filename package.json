@@ -29,7 +29,7 @@
   "eslintConfig": {
     "root": false,
     "env": {
-      "node": false
+      "node": true
     },
     "extends": [
       "plugin:vue/essential",

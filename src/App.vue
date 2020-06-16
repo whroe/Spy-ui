@@ -8,7 +8,7 @@
       <div class="row">
         <div class="column left">
              <ul class="menu">
-               <li v-for="(item,i) in menuData" :key="i + 'r'" @click="routerJump(item.url)">{{item.name}}</li>
+               <li v-for="(item,i) in menuData" :key="i + 'r'" :class="{active:$route.path == item.url}" @click="routerJump(item.url)">{{item.name}}</li>
              </ul>
         </div>
         
@@ -48,6 +48,9 @@ export default {
       },{
         name:'dialog组件',
         url:'/dialog'
+      },{
+        name:'日历',
+        url:'/calendar'
       }]
       
     }

@@ -87,6 +87,9 @@
                 box-sizing: border-box;
                 white-space: nowrap;
             }
+            li.active{
+                color: #409eff;
+            }
             li:hover{
                 background-color: #ecf5ff;
             }

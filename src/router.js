@@ -8,12 +8,20 @@ const router = new Router({
     routes:[{
         path:'/',
         name:'首页',
-        component:() => import('./components/spy-input.vue'),
+        component:() => import('./components/index.vue'),
         // redirect:'/'
     },{
         path:'/dialog',
         name:'dialog组件',
         component:() => import('./components/spy-dialog.vue'),
+    },{
+        path:'/calendar',
+        name:"日历",
+        component:() => import('./components/spy-calendar.vue')
+    },{
+        path:'/input',
+        name:'输入框',
+        component:() => import('./components/spy-input.vue')
     }]
 })
 
