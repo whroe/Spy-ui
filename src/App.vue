@@ -8,7 +8,9 @@
       <div class="row">
         <div class="column left">
              <ul class="menu">
-               <li v-for="(item,i) in menuData" :key="i + 'r'" :class="{active:$route.path == item.url}" @click="routerJump(item.url)">{{item.name}}</li>
+               <li v-for="(item,i) in menuData" :key="i + 'r'"  @click="routerJump(item.url,$event)">
+                 <div :class="{active:$route.path == item.url}" class="spy-menu-title">{{item.name}}</div>
+               </li>
              </ul>
         </div>
         
@@ -20,7 +22,9 @@
             <button @click="vue()">test</button>
             <input v-model="news" />
             </Spy-dialog> -->
-            <router-view></router-view>
+            <keep-alive include="calendar">
+               <router-view></router-view>
+            </keep-alive>
         </div>
         
 
@@ -44,13 +48,19 @@ export default {
       userName:'',
       menuData:[{
         name:'首页',
-        url:'/'
+        url:'/'     
       },{
         name:'dialog组件',
         url:'/dialog'
       },{
         name:'日历',
-        url:'/calendar'
+        url:'/calendar',
+        children:[
+          {
+            name:'日历-1',
+            url:''
+          }
+        ]
       }]
       
     }
@@ -78,6 +88,8 @@ export default {
         ]
   },
   created(){
+    console.log(this.$router.options.routes);
+    
     this.a = Object.assign({}, this.a, {
   age: 27,
   favoriteColor: 'Vue Green'

@@ -49,7 +49,7 @@
   /* 创建三个相等的列 */
   .column {
     float: left;
-    width: 33.33%;
+    width: 20%;
   }
    
   /* 列后清除浮动 */
@@ -61,8 +61,8 @@
    .row{
        height: 100%;
        .left{
-        width: 300px;
         height: 100%;
+        min-width: 300px;
         .menu{
             border-right: 1px solid #e6e6e6;
             list-style: none;
@@ -86,8 +86,20 @@
                 transition: border-color .3s,background-color .3s,color .3s;
                 box-sizing: border-box;
                 white-space: nowrap;
+                .spy-menu-title{
+                    height: 56px;
+                    line-height: 56px;
+                    font-size: 14px;
+                    padding: 0 20px;
+                    list-style: none;
+                    cursor: pointer;
+                    position: relative;
+                    transition: border-color .3s,background-color .3s,color .3s;
+                    box-sizing: border-box;
+                    white-space: nowrap
+                }
             }
-            li.active{
+            .active{
                 color: #409eff;
             }
             li:hover{
@@ -96,12 +108,16 @@
         }
        }
        .right{
-           width: calc(100% - 300px);
+           height: 100%;
+           width: calc(100% - 20%);
        }
    }
   /* 响应式布局 - 小于 600 px 时改为上下布局 */
   @media screen and (max-width: 600px) {
     .column {
       width: 100%;
+    }
+    .home{
+        overflow-y: scroll;
     }
   }

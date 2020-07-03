@@ -239,3 +239,48 @@ export function objToArray(obj) {
   }
   return isEmpty(obj) ? [] : [obj];
 }
+
+export function doHandleDate() {
+  var myDate = new Date();
+  var tYear = myDate.getFullYear();
+  var tMonth = myDate.getMonth();
+
+  var m = tMonth + 1;
+  if (m.toString().length == 1) {
+      m = "0" + m;
+  }
+  return tYear +'-'+ m;
+}
+export function doHandleYear() {
+  var myDate = new Date();
+  var tYear = myDate.getFullYear();
+
+  return tYear;
+}
+export function doHandleMonth() {
+  var myDate = new Date();
+  var tMonth = myDate.getMonth();
+
+  var m = tMonth + 1;
+  if (m.toString().length == 1) {
+      m = "0" + m;
+  }
+  return m;
+}
+export function formatDate(dates) {
+  var date = new Date(dates);
+  var YY = date.getFullYear() + '-';
+  var MM = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+  var DD = (date.getDate() < 10 ? '0' + (date.getDate()) : date.getDate());
+  var hh = (date.getHours() < 10 ? '0' + date.getHours() : date.getHours()) + ':';
+  var mm = (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()) + ':';
+  var ss = (date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds());
+  return YY + MM + DD +" "+hh + mm + ss;
+}
+export default{
+  doHandleMonth,
+  doHandleYear,
+  doHandleDate,
+  objToArray,
+  formatDate
+}
