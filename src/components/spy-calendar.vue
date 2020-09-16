@@ -11,7 +11,7 @@
     </div>
     <!-- 日历内容 -->
     <div class="calenderInside">
-      <div :class="{calenderItem:true,CanlenderActive:nowDate == item}" v-for="item of calenderArray" :key="item+'date'">{{item}}</div>
+      <div :class="{calenderItem:true,CanlenderActive:nowDate == item}" v-for="item of calenderArray" :key="item+`date${item}`">{{item}}</div>
     </div>
   </div>
 </template>

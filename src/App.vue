@@ -1,8 +1,9 @@
 <template> 
     <div class="header home">
       <div class="topnav">
-        <router-link to='/'>首页</router-link>
-        <router-link to='/dialog'>dialog</router-link>
+        <router-link :to='item.url' v-for="(item,i) in menuData" :key="i + 't'">
+          <div :class="{active:$route.path == item.url}" class="spy-menu-title">{{item.name}}</div>
+        </router-link>
       </div>
 
       <div class="row">
@@ -22,6 +23,11 @@
             <button @click="vue()">test</button>
             <input v-model="news" />
             </Spy-dialog> -->
+                    <!-- <Spy-tree ref="bigTree" :tree="tree" :defaultExpand="true" >
+          <template v-slot="{ item }">
+            <div>{{ item.label }}</div>
+          </template>
+        </Spy-tree> -->
             <keep-alive include="calendar">
                <router-view></router-view>
             </keep-alive>
@@ -43,26 +49,10 @@ export default {
       a:{
         b:1
       },
+      tree:[],
       news:'2',
       name:'1',
       userName:'',
-      menuData:[{
-        name:'首页',
-        url:'/'     
-      },{
-        name:'dialog组件',
-        url:'/dialog'
-      },{
-        name:'日历',
-        url:'/calendar',
-        children:[
-          {
-            name:'日历-1',
-            url:''
-          }
-        ]
-      }]
-      
     }
   },
   provide:{
@@ -70,6 +60,11 @@ export default {
       console.log(this);
       console.log(this.$data);
       return this.$data
+    }
+  },
+  computed:{
+    menuData(){
+      return this.$store.state.menuList
     }
   },
   watch:{
@@ -89,7 +84,17 @@ export default {
   },
   created(){
     console.log(this.$router.options.routes);
-    
+    for (let index = 0; index < 50000; index++) {
+          this.tree.push({
+                label: `${this.number_chinese(index)}级 ${this.number_chinese(index)}`,
+                children: [{
+                    label: `${this.number_chinese(index + 1)}级 ${this.number_chinese(index + 1)}-${this.number_chinese(index + 1)}`,
+                    children: [{
+                    label: `${this.number_chinese(index + 2)}级${this.number_chinese(index + 2)}-${this.number_chinese(index + 2)}-${this.number_chinese(index + 2)}`
+                    }]
+                }]
+          })
+      }
     this.a = Object.assign({}, this.a, {
   age: 27,
   favoriteColor: 'Vue Green'
@@ -133,6 +138,20 @@ export default {
     name.apply_(this.a,['12','1233213',7])
   },
   methods:{
+        number_chinese(str) {
+                    var num = parseFloat(str);
+                    var strOutput = "";
+                    num += "";
+                    var intPos = num.indexOf('.');  
+                    if (intPos >= 0){
+                        num = num.substring(0, intPos) + num.substr(intPos + 1, 2);
+                    }
+                    for (var i=0; i < num.length; i++){
+                        strOutput += '零壹贰叁肆伍陆柒捌玖'.substr(num.substr(i,1),1)
+                    }
+                    return strOutput
+
+    },
     vue(){
 
       this.a.age =1
@@ -157,5 +176,9 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-
+@media screen and (max-width: 1000px) {
+    .left {
+        display: none;
+    }
+}
 </style>

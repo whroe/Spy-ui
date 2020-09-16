@@ -200,7 +200,7 @@ $container-height: 500;
 
 .container {
     position: relative;
-    width: 900px;
+    width: 100%;
     height: $container-height + unquote('px');
     overflow: hidden;
     background: #feee9d;

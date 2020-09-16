@@ -1,17 +1,21 @@
 <template>
   <div class="spy-input">
-    <input :type="type" class="spy-input__inner" v-bind="$attrs" :value="value" @input="$emit($event.target.value)" :disabled='disabled' :placeholder="placeholder">
+    <input :type="type" class="spy-input__inner" v-bind="$attrs" :value="value" @input="$emit('input',$event.target.value)" :disabled='disabled' :placeholder="placeholder">
   </div>
 </template>
 <script>
 export default {
     data(){
         return {
-            userName:''
+            userName:'',
         }
     },
     props: {
         placeholder: {
+            type: String,
+            default: ''
+        },
+        value: {
             type: String,
             default: ''
         },

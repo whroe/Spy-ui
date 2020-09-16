@@ -13,12 +13,12 @@ function changeStr(str){
     关于这个Api的用法，建议小伙伴们去查阅一下，用途也比较广泛
 */
 const requireComponent = require.context('./components', false, /\.vue$/)
-console.log('requireComponent.keys():',requireComponent.keys())  // 打印
+console.log('requireComponent.keys():',requireComponent)  // 打印
 requireComponent.keys().forEach(fileName => {
     const config = requireComponent(fileName)
     const componentName = changeStr(
         fileName.replace(/^\.\//, '').replace(/\.\w+$/, '')   // ./child1.vue => child1
     )
-    console.log('config:',config,componentName)  // 打印
+    console.log('config:',config,componentName,fileName)  // 打印
     Vue.component(componentName, config.default || config) // 动态注册该目录下的所有.vue文件
 })
